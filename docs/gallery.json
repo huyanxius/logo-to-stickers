@@ -1,0 +1,122 @@
+[
+  {
+    "name": "Qunxue",
+    "subtitle": "Four shapes. A tiny research team.",
+    "description": "Keep the four charcoal fragments. Add eyes and ink-line limbs. Let the collaboration supply the story.",
+    "route": "Shape → cast",
+    "id": "qunxue",
+    "logo": "assets/logo-qunxue.png",
+    "scenes": [
+      {
+        "title": "Fieldwork, very close up",
+        "description": "Four paper researchers take a tiny daisy very seriously.",
+        "image": "assets/qunxue-01.webp",
+        "alt": "Qunxue paper sticker: fieldwork, very close up"
+      },
+      {
+        "title": "A little help from your colleagues",
+        "description": "Four logo fragments become a rather wobbly ladder.",
+        "image": "assets/qunxue-02.webp",
+        "alt": "Qunxue paper sticker: a little help from your colleagues"
+      },
+      {
+        "title": "Studying relationships",
+        "description": "The researchers get tangled in the very thread they are studying.",
+        "image": "assets/qunxue-03.webp",
+        "alt": "Qunxue paper sticker: studying relationships"
+      },
+      {
+        "title": "An important interview",
+        "description": "A paper-cup telephone becomes a field research tool.",
+        "image": "assets/qunxue-04.webp",
+        "alt": "Qunxue paper sticker: an important interview"
+      },
+      {
+        "title": "Lost in a good book",
+        "description": "Four researchers find five minutes of shelter between the pages.",
+        "image": "assets/qunxue-05.webp",
+        "alt": "Qunxue paper sticker: lost in a good book"
+      }
+    ]
+  },
+  {
+    "name": "MultiPush",
+    "subtitle": "Many routes. Eight rather busy arms.",
+    "description": "Turn multi-platform publishing into a postal writer with many hands. Keep the blue, mint and original arrow mark.",
+    "route": "Meaning → ability",
+    "id": "multipush",
+    "logo": "assets/logo-multipush.png",
+    "scenes": [
+      {
+        "title": "Eight hands, one deadline",
+        "description": "Typing, folding, coffee: even eight hands have their limits.",
+        "image": "assets/multipush-01.webp",
+        "alt": "MultiPush paper sticker: eight hands, one deadline"
+      },
+      {
+        "title": "The inbox wins",
+        "description": "The little postal writer disappears under its own outgoing mail.",
+        "image": "assets/multipush-02.webp",
+        "alt": "MultiPush paper sticker: the inbox wins"
+      },
+      {
+        "title": "Special delivery",
+        "description": "Sometimes sending a draft means riding the paper airplane yourself.",
+        "image": "assets/multipush-03.webp",
+        "alt": "MultiPush paper sticker: special delivery"
+      },
+      {
+        "title": "A routing problem",
+        "description": "One arm keeps working while the others try to untie themselves.",
+        "image": "assets/multipush-04.webp",
+        "alt": "MultiPush paper sticker: a routing problem"
+      },
+      {
+        "title": "Everything sent",
+        "description": "The outbox makes a perfectly good place for a nap.",
+        "image": "assets/multipush-05.webp",
+        "alt": "MultiPush paper sticker: everything sent"
+      }
+    ]
+  },
+  {
+    "name": "Windup",
+    "subtitle": "A mechanical bird, learning to move.",
+    "description": "Start with the actual bird mark. Its winding key, wing panel and motion strips become material for small visual jokes.",
+    "route": "Mark → motion",
+    "id": "windup",
+    "logo": "assets/logo-windup.png",
+    "scenes": [
+      {
+        "title": "A little too much wind-up",
+        "description": "The winding key turns into an accidental helicopter.",
+        "image": "assets/windup-01.webp",
+        "alt": "Windup paper sticker: a little too much wind-up"
+      },
+      {
+        "title": "Caught in its own animation",
+        "description": "A strip of motion studies catches the bird by the ankle.",
+        "image": "assets/windup-02.webp",
+        "alt": "Windup paper sticker: caught in its own animation"
+      },
+      {
+        "title": "Ambitious wing design",
+        "description": "A new paper wing is a little bigger than the bird had planned.",
+        "image": "assets/windup-03.webp",
+        "alt": "Windup paper sticker: ambitious wing design"
+      },
+      {
+        "title": "Out of the frame",
+        "description": "A drawn character takes its first step out of the storyboard.",
+        "image": "assets/windup-04.webp",
+        "alt": "Windup paper sticker: out of the frame"
+      },
+      {
+        "title": "End of the animation shift",
+        "description": "A curled animation strip becomes a nest.",
+        "image": "assets/windup-05.webp",
+        "alt": "Windup paper sticker: end of the animation shift"
+      }
+    ]
+  }
+]
