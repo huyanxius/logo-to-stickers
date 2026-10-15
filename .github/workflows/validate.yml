@@ -1,0 +1,13 @@
+name: Package integrity
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - run: python3 scripts/validate.py
+      - run: node --check docs/app.js
