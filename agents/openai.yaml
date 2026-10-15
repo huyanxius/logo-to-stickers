@@ -1,0 +1,4 @@
+interface:
+  display_name: "Logo to Stickers"
+  short_description: "Turn brand marks into playful paper sticker characters"
+  default_prompt: "Use $logo-to-stickers to turn this logo into five playful, consistent paper stickers with little visual stories and transparent backgrounds."
