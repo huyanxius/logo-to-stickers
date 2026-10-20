@@ -2,77 +2,94 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#edf0f1">
-  <title>Logo to Stickers — give your logo a little life</title>
-  <meta name="description" content="Turn a logo into a character with something to do. An open image-generation skill, with 15 real paper-sticker examples and the prompts behind them.">
-  <meta property="og:title" content="Give your logo a little life.">
-  <meta property="og:description" content="Three real logos. Fifteen little stories. One reusable skill.">
-  <meta property="og:image" content="https://huyanxius.github.io/logo-to-stickers/assets/social-preview.png">
-  <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" href="assets/logo-windup.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Give your logo a little life. An open-source agent skill for turning real brand marks into playful character stickers, with fifteen examples and their original prompts.">
+  <meta name="theme-color" content="#f8f9f5">
+  <meta property="og:title" content="Logo to Stickers — Give your logo a little life.">
+  <meta property="og:description" content="Turn a logo into a character, and a character into a whole set of stories. Explore the examples and get the open-source skill.">
+  <meta property="og:image" content="assets/social-preview.png">
+  <title>Logo to Stickers — Give your logo a little life.</title>
   <link rel="stylesheet" href="styles.css">
   <script src="app.js" defer></script>
 </head>
 <body>
-  <a class="skip" href="#gallery">Skip to the examples</a>
-  <header class="topbar wrap">
-    <a class="wordmark" href="#">logo<span>↗</span>stickers</a>
-    <nav aria-label="Main"><a href="#gallery">The examples</a><a href="#install">Get the skill</a><a class="github-link" href="https://github.com/huyanxius/logo-to-stickers">GitHub ↗</a></nav>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header wrap">
+    <a class="wordmark" href="#" aria-label="Logo to Stickers home"><span>logo</span><span class="wordmark-arrow" aria-hidden="true"><svg class="icon-arrow" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></span><span>stickers</span></a>
+    <nav aria-label="Main navigation">
+      <a class="nav-link" href="#gallery">Examples</a>
+      <a class="nav-link" href="https://github.com/huyanxius/logo-to-stickers">GitHub <span aria-hidden="true"><svg class="icon-arrow" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></span></a>
+      <a class="button button-ink nav-cta" href="#install">Get the skill <span aria-hidden="true"><svg class="icon-arrow" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></span></a>
+    </nav>
   </header>
-  <main>
+  <main id="main">
     <section class="hero wrap" aria-labelledby="hero-title">
       <div class="hero-copy">
-        <p class="eyebrow">A small skill for a little personality</p>
-        <h1 id="hero-title">Give your logo<br>a little <em>life.</em></h1>
-        <p class="intro">Keep the shapes that make it yours.<br>Give them a character. Then something to do.</p>
-        <a class="primary-link" href="#gallery">Meet the cast <span>↓</span></a>
-        <p class="hero-note">Three real logos. Fifteen little stories.<br>Made during one night of portfolio work.</p>
+        <p class="eyebrow"><svg class="skill-symbol" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 2v20M2 12h20M5 5l14 14M5 19 19 5"/></svg> An open-source agent skill</p>
+        <h1 id="hero-title">Give your logo<br>a little <span>life.</span></h1>
+        <p class="hero-description">Turn a logo into a character, and a character into a whole set of stories. Made to feel like your brand, with a little more personality.</p>
+        <div class="hero-actions">
+          <a class="button button-blue" href="#install">Make your own set <svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+          <a class="text-link" href="#gallery">Explore the examples <span aria-hidden="true"><svg class="icon-arrow" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 5v14m-6-6 6 6 6-6"/></svg></span></a>
+        </div>
+        <p class="hero-note">Transparent PNGs. A consistent cast. Ready for your next project.</p>
       </div>
-      <div class="hero-art" aria-label="Three examples of logos developed into sticker characters">
-        <img class="floating cast-research" src="assets/qunxue-01.webp" alt="Four charcoal logo fragments investigating a daisy" width="800" height="800">
-        <img class="floating cast-postal" src="assets/multipush-01.webp" alt="A many-armed postal writer trying to meet a deadline" width="800" height="800">
-        <img class="floating cast-bird" src="assets/windup-01.webp" alt="A mechanical bird lifted by its own winding key" width="800" height="800">
-        <span class="pencil-note">A logo, with a day job.</span>
-        <button id="originals-toggle" class="text-button" type="button" aria-pressed="false">Show the original logos ↔</button>
+      <div class="hero-art" aria-label="Three character sets made with Logo to Stickers">
+        <div class="hero-halo" aria-hidden="true"></div>
+        <div class="origin-mark"><img src="assets/logo-multipush.png" width="40" height="40" alt="Original MultiPush logo"><span>It starts with a logo.</span><svg class="origin-arrow" viewBox="0 0 60 48" aria-hidden="true"><path d="M5 5C35 2 49 15 42 39m-9-8 9 10 10-7"/></svg></div>
+        <a class="hero-sticker hero-multipush" href="#gallery" data-brand-preview="multipush" aria-label="Explore the MultiPush sticker set"><img src="assets/multipush-01.webp" width="800" height="800" alt="A blue octopus with eight busy arms typing, folding paper and drinking coffee" fetchpriority="high"><span class="sticker-name">MultiPush <span aria-hidden="true"><svg class="icon-arrow" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></span></span></a>
+        <a class="hero-sticker hero-qunxue" href="#gallery" data-brand-preview="qunxue" aria-label="Explore the Qunxue sticker set"><img src="assets/qunxue-01.webp" width="800" height="800" alt="Four charcoal paper researchers examining a daisy with a magnifying glass"><span class="sticker-name">Qunxue <span aria-hidden="true"><svg class="icon-arrow" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></span></span></a>
+        <a class="hero-sticker hero-windup" href="#gallery" data-brand-preview="windup" aria-label="Explore the Windup sticker set"><img src="assets/windup-01.webp" width="800" height="800" alt="A little mechanical bird taking flight with its winding key"><span class="sticker-name">Windup <span aria-hidden="true"><svg class="icon-arrow" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></span></span></a>
       </div>
     </section>
 
     <section id="gallery" class="gallery wrap" aria-labelledby="gallery-title">
-      <div class="section-heading"><div><p class="eyebrow">From mark to character</p><h2 id="gallery-title">Same DNA.<br><em>A little more going on.</em></h2></div><p>These are the actual projects and outputs.<br>Pick a brand, then follow its little stories.</p></div>
-      <div class="brand-tabs" role="tablist" aria-label="Choose a brand">
-        <button id="tab-qunxue" role="tab" aria-selected="true" aria-controls="brand-panel" data-brand="qunxue">Qunxue <span>群学</span></button>
-        <button id="tab-multipush" role="tab" aria-selected="false" aria-controls="brand-panel" tabindex="-1" data-brand="multipush">MultiPush</button>
-        <button id="tab-windup" role="tab" aria-selected="false" aria-controls="brand-panel" tabindex="-1" data-brand="windup">Windup</button>
+      <div class="section-heading">
+        <div><p class="eyebrow">Made with the skill</p><h2 id="gallery-title">Three logos.<br>Fifteen little stories.</h2></div>
+        <p>Real marks, real outputs. See how each brand becomes a character without losing what makes it recognisable.</p>
       </div>
-      <div id="brand-panel" class="brand-panel" role="tabpanel" aria-labelledby="tab-qunxue">
-        <div class="origin"><p class="eyebrow">The original mark</p><img id="brand-logo" src="assets/logo-qunxue.png" alt="Original Qunxue logo" width="180" height="180"><p id="brand-route" class="route">Shape → cast</p><h3 id="brand-subtitle">Four shapes.<br>A tiny research team.</h3><p id="brand-description">Keep the four charcoal fragments. Add eyes and ink-line limbs. Let the collaboration supply the story.</p><a href="https://github.com/huyanxius/logo-to-stickers/blob/main/examples/prompts.json">Read the actual prompts ↗</a></div>
-        <div class="sticker-view">
-          <div class="stage" id="stage"><span class="stage-label">The little life</span><button id="surface-toggle" type="button" class="surface-toggle" aria-pressed="false">Dark paper</button><img id="scene-image" src="assets/qunxue-01.webp" width="800" height="800" alt="Four paper researchers investigating a daisy"><span class="stage-arrow" aria-hidden="true">↗</span></div>
-          <div class="scene-caption" aria-live="polite"><h3 id="scene-title">Fieldwork, very close up</h3><p id="scene-description">Four paper researchers take a tiny daisy very seriously.</p></div>
-          <div id="scene-picker" class="scene-picker" role="group" aria-label="Choose a sticker story"></div>
+      <div class="gallery-toolbar">
+        <div id="brand-tabs" class="brand-tabs" role="tablist" aria-label="Choose a sticker set"></div>
+        <a class="text-link prompt-link" href="https://github.com/huyanxius/logo-to-stickers/blob/main/examples/prompts.json">Read the original prompts <span aria-hidden="true"><svg class="icon-arrow" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></span></a>
+      </div>
+      <div id="gallery-panel" class="gallery-panel" role="tabpanel" tabindex="0">
+        <div class="gallery-visual">
+          <figure id="stage" class="canvas">
+            <div class="view-tools" aria-label="Preview controls"><button id="originals-toggle" class="button button-small" type="button" aria-pressed="false">Show original</button><button id="surface-toggle" class="surface-button" type="button" aria-pressed="false" aria-label="Dark background" title="Dark background"><span class="surface-swatch" aria-hidden="true"></span><span class="sr-only">Dark background</span></button></div>
+            <div class="artwork"><img id="scene-image" width="800" height="800" alt="" decoding="async"></div>
+            <figcaption class="canvas-caption"><h3 id="scene-title"></h3><span id="scene-count" aria-hidden="true"></span></figcaption>
+          </figure>
+          <div class="scene-navigation"><button id="previous-scene" class="step-button" type="button" aria-label="Previous sticker"><svg viewBox="0 0 24 24" width="21" height="21" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></button><div id="scene-picker" class="scene-picker" role="group" aria-label="Choose a sticker"></div><button id="next-scene" class="step-button" type="button" aria-label="Next sticker"><svg viewBox="0 0 24 24" width="21" height="21" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg></button></div>
         </div>
+        <aside class="set-information" aria-labelledby="brand-name">
+          <div class="source-logo"><img id="brand-logo" width="64" height="64" alt=""><span>Original mark</span></div>
+          <p id="brand-route" class="route-label"></p>
+          <h3 id="brand-name"></h3>
+          <p id="brand-description" class="brand-description"></p>
+          <div class="scene-story"><span class="eyebrow">In this scene</span><p id="scene-description"></p></div>
+          <a class="text-link" href="https://github.com/huyanxius/logo-to-stickers/releases/latest">Get the example PNGs <span aria-hidden="true"><svg class="icon-arrow" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></span></a>
+        </aside>
       </div>
-      <p id="gallery-status" class="gallery-status" role="status"></p>
+      <p id="gallery-error" class="error" hidden>The examples could not load. <a href="https://github.com/huyanxius/logo-to-stickers">View them on GitHub</a>.</p>
+      <p id="gallery-status" class="sr-only" role="status" aria-live="polite"></p>
+      <noscript><p>Enable JavaScript to browse all fifteen sticker scenes, or <a href="https://github.com/huyanxius/logo-to-stickers">view the examples and prompts on GitHub</a>.</p></noscript>
     </section>
 
-    <section class="method wrap" aria-labelledby="method-title">
-      <p class="eyebrow">The useful part is the thinking</p>
-      <h2 id="method-title">A character needs<br><em>something to do.</em></h2>
-      <div class="method-grid">
-        <article><span>01 / Notice</span><h3>Read the mark.</h3><p>Keep a recognisable shape, colour relationship, or peculiar little detail. The brand is the starting material.</p></article>
-        <article><span>02 / Translate</span><h3>Give it a job.</h3><p>Four fragments can be a team. Many publishing routes can become many busy arms. Find the ability in the idea.</p></article>
-        <article><span>03 / Play</span><h3>Let it go a little wrong.</h3><p>A researcher tangled in relationships. A bird tripping over its own frames. A small consequence makes a story.</p></article>
-        <article><span>04 / Finish</span><h3>Keep the paper real.</h3><p>Matte printed colour, a thin white cut edge, a clear silhouette, and actual transparent space around the sticker.</p></article>
-      </div>
+    <section class="approach wrap" aria-labelledby="approach-title">
+      <div class="approach-art"><div class="approach-backdrop" aria-hidden="true"></div><img src="assets/multipush-03.webp" width="800" height="800" alt="The MultiPush octopus riding a paper airplane to make a special delivery" loading="lazy"></div>
+      <div class="approach-copy"><p class="eyebrow">More than a face on a logo</p><h2 id="approach-title">A character.<br>Something to do.</h2><p>The skill starts with the shapes and ideas already in your brand. Those become a cast, an ability, or a way of moving.</p><p>Then comes the story: an action, a small mishap, a reaction. Keep the same character across the set, and finish each scene with a real paper-sticker edge.</p><a class="text-link" href="https://github.com/huyanxius/logo-to-stickers/blob/main/references/design-method.md">See the design method <span aria-hidden="true"><svg class="icon-arrow" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></span></a></div>
     </section>
 
     <section id="install" class="install wrap" aria-labelledby="install-title">
-      <div><p class="eyebrow">Take the method with you</p><h2 id="install-title">Your logo is next.</h2><p>A reusable skill for a reference-capable image generator.<br>The examples were made with Codex’s built-in image tool.</p></div>
-      <div class="install-actions"><div class="command"><code>npx skills add huyanxius/logo-to-stickers</code><button id="copy-command" type="button">Copy</button></div><p id="copy-status" role="status">Then ask: “Turn this logo into five playful paper stickers.”</p><div class="install-links"><a href="https://github.com/huyanxius/logo-to-stickers">Read the skill on GitHub ↗</a><a href="https://github.com/huyanxius/logo-to-stickers/releases/latest">Download the example PNGs ↗</a></div></div>
+      <div class="install-top"><div><p class="eyebrow">Make your own</p><h2 id="install-title">Your logo.<br>A whole new cast.</h2><p>Bring a mark you care about.<br>Give your agent the rest.</p></div><img class="install-character" src="assets/qunxue-02.webp" width="800" height="800" alt="The Qunxue characters helping each other climb a wobbly ladder" loading="lazy"></div>
+      <div class="install-steps">
+        <div class="install-step"><span class="step-number">01</span><div><h3>Add the skill</h3><p>Install it in your agent with the Skills CLI.</p><div class="command"><code id="install-command">npx skills add huyanxius/logo-to-stickers</code><button id="copy-command" class="copy-button" type="button" aria-label="Copy install command"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="3"/><path d="M15 5V4a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h1"/></svg><span>Copy</span></button></div><p id="copy-status" class="copy-status" role="status" aria-live="polite"></p></div></div>
+        <div class="install-step"><span class="step-number">02</span><div><h3>Bring your logo</h3><p>Attach the actual mark, then ask your agent:</p><p class="prompt-example">Use $logo-to-stickers to make five playful paper stickers from this logo. Keep the brand recognisable, give each image a little story, and save five separate transparent PNGs.</p></div></div>
+        <div class="install-step"><span class="step-number">03</span><div><h3>Meet your characters</h3><p>Review the first sticker, use it as a reference for the rest, and export your set as transparent PNGs.</p><a class="text-link" href="https://github.com/huyanxius/logo-to-stickers#try-it">Read the full guide <span aria-hidden="true"><svg class="icon-arrow" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></span></a></div></div>
+      </div>
+      <p class="compatibility">Tested with Codex’s built-in image generator. Your agent needs a reference-capable image tool with transparent output; the skill provides the workflow, not an image model.</p>
     </section>
   </main>
-  <footer class="wrap"><a class="wordmark" href="#">logo<span>↗</span>stickers</a><p>Made from real work, by <a href="https://github.com/huyanxius">huyanxius</a>.</p><a href="https://github.com/huyanxius/logo-to-stickers/blob/main/README.zh-CN.md">中文说明 ↗</a><a href="https://github.com/huyanxius/logo-to-stickers/blob/main/NOTICE.md">Examples & attribution</a></footer>
+  <footer class="footer wrap"><div class="footer-top"><a class="wordmark" href="#" aria-label="Logo to Stickers home"><span>logo</span><span class="wordmark-arrow" aria-hidden="true"><svg class="icon-arrow" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></span><span>stickers</span></a><div class="footer-links"><a href="https://github.com/huyanxius/logo-to-stickers">GitHub <span aria-hidden="true"><svg class="icon-arrow" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg></span></a><a href="https://github.com/huyanxius/logo-to-stickers/blob/main/SKILL.md">The skill</a><a href="https://github.com/huyanxius/logo-to-stickers/blob/main/NOTICE.md">Usage &amp; rights</a></div></div><p>Skill code is MIT licensed. Example artwork and brand marks retain their own rights; no endorsement is implied.</p></footer>
 </body>
 </html>
