@@ -26,21 +26,42 @@
   </header>
 
   <main id="main">
-    <section class="hero wrap" id="top" aria-labelledby="hero-title">
-      <div class="hero-copy">
-        <h1 id="hero-title">Give your logo<br>a little life.</h1>
-        <p class="lede">A small, open-source agent skill that turns a real logo into a character with something to do — and then into a whole set of paper stickers.</p>
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <h1 id="hero-title">Give your logo<br>a little life.</h1>
+      <p class="lede">An open-source agent skill that turns a real logo into a character with something to do. Peel one of these to see what it became.</p>
+      <div class="pad" id="pad">
+        <div class="slot" data-brand="qunxue" style="--t:-4deg;--ct:-6deg">
+          <div class="char"><img src="assets/qunxue-01.webp" width="800" height="800" alt="Qunxue: four charcoal paper researchers examining a daisy" draggable="false"></div>
+          <button type="button" class="label" aria-label="Peel the Qunxue logo">
+            <span class="face"><img src="assets/logo-qunxue.png" width="360" height="360" alt="" draggable="false"></span>
+            <span class="flap-wrap" aria-hidden="true"><span class="flap"></span></span>
+          </button>
+          <p class="slot-name"><b>Qunxue</b><span>shape → cast</span></p>
+        </div>
+        <div class="slot" data-brand="multipush" style="--t:2deg;--ct:-3deg">
+          <div class="char"><img src="assets/multipush-01.webp" width="800" height="800" alt="MultiPush: a blue octopus typing, folding paper and drinking coffee at once" draggable="false"></div>
+          <button type="button" class="label" aria-label="Peel the MultiPush logo">
+            <span class="face"><img src="assets/logo-multipush.png" width="360" height="360" alt="" draggable="false"></span>
+            <span class="flap-wrap" aria-hidden="true"><span class="flap"></span></span>
+          </button>
+          <p class="slot-name"><b>MultiPush</b><span>meaning → ability</span></p>
+        </div>
+        <div class="slot" data-brand="windup" style="--t:5deg;--ct:7deg">
+          <div class="char"><img src="assets/windup-01.webp" width="800" height="800" alt="Windup: a mechanical bird taking off with its winding key" draggable="false"></div>
+          <button type="button" class="label" aria-label="Peel the Windup logo">
+            <span class="face"><img src="assets/logo-windup.png" width="360" height="360" alt="" draggable="false"></span>
+            <span class="flap-wrap" aria-hidden="true"><span class="flap"></span></span>
+          </button>
+          <p class="slot-name"><b>Windup</b><span>mark → motion</span></p>
+        </div>
+      </div>
+      <p class="pad-status"><span id="pad-hint">Drag a corner, or just click.</span><button type="button" class="restick" id="restick" hidden>Stick them back on</button></p>
+      <div class="hero-foot">
         <div class="command">
           <code>npx skills add <span class="nw">huyanxius/logo-to-stickers</span></code>
           <button type="button" class="copy" data-copy="npx skills add huyanxius/logo-to-stickers">Copy</button>
         </div>
-        <p class="hero-links"><a href="#examples">See all fifteen stickers</a><span aria-hidden="true">·</span><a href="https://github.com/huyanxius/logo-to-stickers/blob/main/SKILL.md">Read the skill</a></p>
-      </div>
-      <div class="board" id="board" aria-label="Three stickers from the examples">
-        <a class="sticker s-multipush" href="#set-multipush" style="--r:-7deg"><img src="assets/multipush-01.webp" width="800" height="800" alt="MultiPush: a blue octopus typing, folding paper and drinking coffee at once" fetchpriority="high" draggable="false"></a>
-        <a class="sticker s-qunxue" href="#set-qunxue" style="--r:8deg"><img src="assets/qunxue-01.webp" width="800" height="800" alt="Qunxue: four charcoal paper researchers examining a daisy" draggable="false"></a>
-        <a class="sticker s-windup" href="#set-windup" style="--r:11deg"><img src="assets/windup-01.webp" width="800" height="800" alt="Windup: a mechanical bird taking off with its winding key" draggable="false"></a>
-        <p class="board-hint" aria-hidden="true">They peel off. Try dragging one.</p>
+        <p class="hero-links"><a href="#examples">All fifteen stickers</a><span aria-hidden="true">·</span><a href="https://github.com/huyanxius/logo-to-stickers/blob/main/SKILL.md">Read the skill</a></p>
       </div>
     </section>
 

@@ -2,8 +2,9 @@
   'use strict';
   const $ = id => document.getElementById(id);
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  // 每张贴纸贴上去的角度：小、正负交替，看起来是手贴的，不是排版排出来的。
-  const TILTS = [-3, 2.5, -1.5, 3, -2];
+  const canDrag = matchMedia('(pointer: fine)').matches;
+  const sleep = ms => new Promise(resolve => setTimeout(resolve, reduceMotion ? 0 : ms));
+  document.documentElement.classList.add('js');
 
   /* ── 复制 ── */
   const status = $('copy-status');
@@ -35,60 +36,138 @@
     }
   }));
 
-  /* ── 首屏：贴纸可以揭下来拖到别处 ── */
-  const board = $('board');
-  const canDrag = matchMedia('(pointer: fine)').matches;
-  let topZ = 10;
-  board.querySelectorAll('.sticker').forEach(sticker => {
-    let start = null, moved = false, justDragged = false;
-    sticker.addEventListener('click', event => {
-      if (justDragged) { event.preventDefault(); justDragged = false; }
-    });
-    if (!canDrag) return;
-    sticker.addEventListener('pointerdown', event => {
-      if (event.button !== 0) return;
+  /* ── 首屏：揭开 logo 标签 ──
+     --d 是从右下角折起的长度。往左上拖就揭得更多，松手时过了四成就整张揭掉，不到就弹回去。 */
+  const slots = [...document.querySelectorAll('.slot')];
+  const hint = $('pad-hint'), restick = $('restick');
+  const HINTS = ['Drag a corner, or just click.', 'Two more to go.', 'One more.', 'That’s what the skill does with your logo.'];
+  let touched = false;
+
+  function paintStatus() {
+    const count = slots.filter(slot => slot.classList.contains('revealed')).length;
+    hint.textContent = HINTS[count];
+    restick.hidden = count < slots.length;
+  }
+
+  async function peel(slot) {
+    if (slot.classList.contains('revealed') || slot.dataset.peeling) return;
+    slot.dataset.peeling = '1';
+    const label = slot.querySelector('.label');
+    label.style.setProperty('--d', `${label.offsetWidth * 0.78}px`);
+    await sleep(320);
+    label.classList.add('gone');
+    label.tabIndex = -1;
+    label.setAttribute('aria-hidden', 'true');
+    slot.classList.add('revealed');
+    delete slot.dataset.peeling;
+    paintStatus();
+  }
+
+  slots.forEach(slot => {
+    const label = slot.querySelector('.label');
+    let start = null, moved = false;
+    label.addEventListener('pointerdown', event => {
+      if (slot.classList.contains('revealed') || event.button !== 0) return;
+      touched = true;
       event.preventDefault();
-      sticker.setPointerCapture(event.pointerId);
-      const style = getComputedStyle(sticker);
-      start = { x: event.clientX, y: event.clientY, dx: parseFloat(style.getPropertyValue('--dx')) || 0, dy: parseFloat(style.getPropertyValue('--dy')) || 0 };
+      label.setPointerCapture(event.pointerId);
+      start = { x: event.clientX, y: event.clientY };
       moved = false;
     });
-    sticker.addEventListener('pointermove', event => {
+    label.addEventListener('pointermove', event => {
       if (!start) return;
-      const x = event.clientX - start.x, y = event.clientY - start.y;
-      if (!moved && Math.hypot(x, y) < 4) return;
-      if (!moved) {
-        moved = true;
-        sticker.classList.remove('stuck');
-        sticker.classList.add('dragging');
-        sticker.style.zIndex = ++topZ;
-        board.classList.add('touched');
-      }
-      sticker.style.setProperty('--dx', `${start.dx + x}px`);
-      sticker.style.setProperty('--dy', `${start.dy + y}px`);
+      const pull = (start.x - event.clientX) + (start.y - event.clientY);
+      if (!moved && Math.abs(pull) < 5) return;
+      moved = true;
+      label.classList.add('dragging');
+      const size = label.offsetWidth;
+      label.style.setProperty('--d', `${Math.max(22, Math.min(size * 1.1, 30 + pull * 0.8))}px`);
     });
-    const drop = () => {
+    const release = () => {
       if (!start) return;
       start = null;
-      if (!moved) return;
-      justDragged = true;
-      sticker.classList.remove('dragging');
-      sticker.style.setProperty('--r', `${(Math.random() * 22 - 11).toFixed(1)}deg`);
-      if (!reduceMotion) {
-        sticker.classList.add('stuck');
-        sticker.addEventListener('animationend', () => sticker.classList.remove('stuck'), { once: true });
+      label.classList.remove('dragging');
+      if (!moved) return peel(slot);
+      const d = parseFloat(label.style.getPropertyValue('--d')) || 0;
+      if (d > label.offsetWidth * 0.42) peel(slot);
+      else label.style.removeProperty('--d');
+    };
+    label.addEventListener('pointerup', release);
+    label.addEventListener('pointercancel', release);
+    label.addEventListener('keydown', event => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      event.preventDefault();
+      touched = true;
+      peel(slot);
+    });
+
+    // 揭出来的角色还能拖着玩；不拖只点一下，就打开它那一套
+    const char = slot.querySelector('.char');
+    let grab = null, dragged = false;
+    char.addEventListener('pointerdown', event => {
+      if (!slot.classList.contains('revealed') || event.button !== 0) return;
+      event.preventDefault();
+      char.setPointerCapture(event.pointerId);
+      const style = getComputedStyle(char);
+      grab = { x: event.clientX, y: event.clientY, dx: parseFloat(style.getPropertyValue('--dx')) || 0, dy: parseFloat(style.getPropertyValue('--dy')) || 0 };
+      dragged = false;
+    });
+    char.addEventListener('pointermove', event => {
+      if (!grab || !canDrag) return;
+      const x = event.clientX - grab.x, y = event.clientY - grab.y;
+      if (!dragged && Math.hypot(x, y) < 5) return;
+      dragged = true;
+      char.classList.add('dragging');
+      char.style.setProperty('--dx', `${grab.dx + x}px`);
+      char.style.setProperty('--dy', `${grab.dy + y}px`);
+    });
+    const drop = () => {
+      if (!grab) return;
+      grab = null;
+      char.classList.remove('dragging');
+      if (!dragged) {
+        const index = scenes.findIndex(item => item.brand.id === slot.dataset.brand);
+        if (index >= 0) openViewer(index);
       }
     };
-    sticker.addEventListener('pointerup', drop);
-    sticker.addEventListener('pointercancel', drop);
-    sticker.addEventListener('dragstart', event => event.preventDefault());
+    char.addEventListener('pointerup', drop);
+    char.addEventListener('pointercancel', drop);
   });
 
-  /* ── 例子 ── */
+  restick.addEventListener('click', () => {
+    slots.forEach(slot => {
+      const label = slot.querySelector('.label');
+      slot.classList.remove('revealed');
+      label.classList.remove('gone');
+      label.style.removeProperty('--d');
+      label.removeAttribute('aria-hidden');
+      label.tabIndex = 0;
+      slot.querySelector('.char').style.cssText = '';
+    });
+    paintStatus();
+    slots[0].querySelector('.label').focus({ preventScroll: true });
+  });
+  paintStatus();
+
+  // 打开一秒后自己慢慢揭开中间那张，让人一眼看懂能揭；用户先动手了就不演
+  if (!reduceMotion) {
+    setTimeout(async () => {
+      if (touched || scrollY > 200) return;
+      const slot = slots[1], label = slot.querySelector('.label');
+      label.style.transition = '--d .9s cubic-bezier(.45,0,.25,1)';
+      label.style.setProperty('--d', `${label.offsetWidth * 0.46}px`);
+      await sleep(1100);
+      label.style.transition = '';
+      if (!touched) peel(slot);
+      else label.style.removeProperty('--d');
+    }, 1100);
+  }
+
+  /* ── 例子：每个品牌一张底纸 ── */
   const setsEl = $('sets');
   const examples = document.querySelector('.examples');
   const viewer = $('viewer');
-  let scenes = [];
+  const scenes = [];
 
   document.querySelectorAll('[data-surface]').forEach(button => button.addEventListener('click', () => {
     const ink = button.dataset.surface === 'ink';
@@ -109,34 +188,43 @@
     return node;
   }
 
+  const sheetObserver = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    entry.target.classList.add('in');
+    sheetObserver.unobserve(entry.target);
+  }), { threshold: 0.3 });
+
   function renderSets(brands) {
-    const arrow = () => {
-      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-      svg.setAttribute('viewBox', '0 0 24 24');
-      svg.setAttribute('class', 'arrow');
-      svg.setAttribute('aria-hidden', 'true');
-      svg.innerHTML = '<path d="M4 12h16m-6-6 6 6-6 6"/>';
-      return svg;
-    };
     brands.forEach(brand => {
-      const buttons = brand.scenes.map((scene, i) => {
+      const peels = [], stories = [];
+      const hot = (i, on) => { peels[i].classList.toggle('hot', on); stories[i].classList.toggle('hot', on); };
+      brand.scenes.forEach((scene, i) => {
         const index = scenes.push({ brand, scene, i }) - 1;
-        const button = el('button', { type: 'button', class: 'scene', style: `--r:${TILTS[i % TILTS.length]}deg`, 'aria-label': `${brand.name}: ${scene.title}. Open larger.` },
-          el('img', { src: scene.image, alt: '', width: 800, height: 800, loading: 'lazy', decoding: 'async', draggable: false }),
-          el('span', {}, scene.title));
-        button.addEventListener('click', () => openViewer(index));
-        return button;
+        const open = () => openViewer(index);
+        const sticker = el('button', { type: 'button', class: `peel p${i}`, style: `--i:${i}`, 'aria-label': `${brand.name}: ${scene.title}. Open larger.` },
+          el('img', { src: scene.image, alt: '', width: 800, height: 800, loading: 'lazy', decoding: 'async', draggable: false }));
+        const story = el('button', { type: 'button', tabIndex: -1 }, el('span', {}, String(i + 1).padStart(2, '0')), el('span', {}, scene.title));
+        [sticker, story].forEach(node => {
+          node.addEventListener('click', open);
+          node.addEventListener('mouseenter', () => hot(i, true));
+          node.addEventListener('mouseleave', () => hot(i, false));
+        });
+        sticker.addEventListener('focus', () => hot(i, true));
+        sticker.addEventListener('blur', () => hot(i, false));
+        peels.push(sticker); stories.push(story);
       });
+      const sheet = el('div', { class: 'sheet' }, ...peels,
+        el('div', { class: 'mark', style: '--i:5' },
+          el('span', {}, el('img', { src: brand.logo, alt: `${brand.name} original logo`, width: 68, height: 68 })),
+          el('small', {}, 'original')));
       setsEl.append(el('article', { class: 'set', id: `set-${brand.id}`, 'aria-labelledby': `name-${brand.id}` },
-        el('div', { class: 'set-head' },
-          el('div', {}, el('h3', { id: `name-${brand.id}` }, brand.name), el('span', { class: 'route' }, brand.route || '')),
-          el('p', {}, brand.description || brand.subtitle || '')),
-        el('div', { class: 'strip' },
-          el('figure', { class: 'origin' },
-            el('span', {}, el('img', { src: brand.logo, alt: `${brand.name} original logo`, width: 68, height: 68 })),
-            el('span', {}, 'Original mark')),
-          arrow(),
-          el('div', { class: 'scenes' }, ...buttons))));
+        sheet,
+        el('div', { class: 'set-info' },
+          el('h3', { id: `name-${brand.id}` }, brand.name),
+          el('span', { class: 'route' }, (brand.route || '').toLowerCase()),
+          el('p', {}, brand.description || brand.subtitle || ''),
+          el('ol', { class: 'stories', 'aria-hidden': 'true' }, ...stories.map(story => el('li', {}, story))))));
+      sheetObserver.observe(sheet);
     });
   }
 
@@ -150,7 +238,7 @@
     image.src = original ? brand.logo : scene.image;
     image.alt = original ? `${brand.name} original logo` : (scene.alt || `${brand.name}: ${scene.title}`);
     stage.classList.toggle('original', original);
-    $('v-brand').textContent = `${brand.name} · ${brand.route || ''}`;
+    $('v-brand').textContent = `${brand.name} · ${(brand.route || '').toLowerCase()}`;
     $('v-count').textContent = `${i + 1} / ${brand.scenes.length}`;
     $('v-title').textContent = scene.title;
     $('v-desc').textContent = scene.description || '';
