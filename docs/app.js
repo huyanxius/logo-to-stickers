@@ -41,7 +41,6 @@
   const slots = [...document.querySelectorAll('.slot')];
   const hint = $('pad-hint'), restick = $('restick');
   const HINTS = ['Drag a corner, or just click.', 'Two more to go.', 'One more.', 'That’s what the skill does with your logo.'];
-  let touched = false;
 
   function paintStatus() {
     const count = slots.filter(slot => slot.classList.contains('revealed')).length;
@@ -68,7 +67,6 @@
     let start = null, moved = false;
     label.addEventListener('pointerdown', event => {
       if (slot.classList.contains('revealed') || event.button !== 0) return;
-      touched = true;
       event.preventDefault();
       label.setPointerCapture(event.pointerId);
       start = { x: event.clientX, y: event.clientY };
@@ -97,7 +95,6 @@
     label.addEventListener('keydown', event => {
       if (event.key !== 'Enter' && event.key !== ' ') return;
       event.preventDefault();
-      touched = true;
       peel(slot);
     });
 
@@ -149,19 +146,28 @@
   });
   paintStatus();
 
-  // 打开一秒后自己慢慢揭开中间那张，让人一眼看懂能揭；用户先动手了就不演
-  if (!reduceMotion) {
-    setTimeout(async () => {
-      if (touched || scrollY > 200) return;
-      const slot = slots[1], label = slot.querySelector('.label');
-      label.style.transition = '--d .9s cubic-bezier(.45,0,.25,1)';
-      label.style.setProperty('--d', `${label.offsetWidth * 0.46}px`);
-      await sleep(1100);
-      label.style.transition = '';
-      if (!touched) peel(slot);
-      else label.style.removeProperty('--d');
-    }, 1100);
+  // 首屏进入视野后，三张从左到右依次自己揭开，最后停在三张贴纸上。
+  // 用户正拖着的那张、已经揭开的那张跳过；偏好减少动态时直接显示揭开后的样子。
+  async function autoPeel(slot) {
+    const label = slot.querySelector('.label');
+    if (slot.classList.contains('revealed') || slot.dataset.peeling || label.classList.contains('dragging')) return;
+    label.style.transition = '--d .8s cubic-bezier(.45,0,.25,1)';
+    label.style.setProperty('--d', `${label.offsetWidth * 0.46}px`);
+    await sleep(900);
+    label.style.transition = '';
+    if (!label.classList.contains('dragging')) peel(slot);
   }
+  const padObserver = new IntersectionObserver(async ([entry]) => {
+    if (!entry.isIntersecting) return;
+    padObserver.disconnect();
+    if (reduceMotion) { slots.forEach(peel); return; }
+    await sleep(700);
+    for (const slot of slots) {
+      autoPeel(slot);
+      await sleep(650);
+    }
+  }, { threshold: 0.5 });
+  padObserver.observe($('pad'));
 
   /* ── 例子：每个品牌一张底纸 ── */
   const setsEl = $('sets');
