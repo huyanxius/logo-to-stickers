@@ -2,7 +2,11 @@
 
 [English](README.md) · [在线画廊](https://huyanxius.github.io/logo-to-stickers/) · [技能正文](SKILL.md) · [透明 PNG 示例](https://github.com/huyanxius/logo-to-stickers/releases/latest)
 
-![让 Logo 长成有故事的纸质贴纸](docs/assets/hero.png)
+<p align="center">
+  <a href="https://huyanxius.github.io/logo-to-stickers/"><img src="https://github.com/huyanxius/logo-to-stickers/releases/download/v1.0.0/logo-day-job.gif" width="400" alt="MultiPush 原 Logo 与四张纸质贴纸成品的十秒轮播"></a>
+</p>
+
+十秒看完原 Logo 与已有生成结果的对照。[播放 MP4](https://github.com/huyanxius/logo-to-stickers/releases/download/v1.0.0/logo-day-job.mp4)。
 
 给一个 Logo，做出一套认得出品牌、也看得出角色在忙什么的纸质贴纸。
 

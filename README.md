@@ -2,7 +2,11 @@
 
 [中文](README.zh-CN.md) · [Live gallery](https://huyanxius.github.io/logo-to-stickers/) · [The skill](SKILL.md) · [Example PNGs](https://github.com/huyanxius/logo-to-stickers/releases/latest)
 
-![Give your logo a little life. Three real logos become paper-sticker characters.](docs/assets/hero.png)
+<p align="center">
+  <a href="https://huyanxius.github.io/logo-to-stickers/"><img src="https://github.com/huyanxius/logo-to-stickers/releases/download/v1.0.0/logo-day-job.gif" width="400" alt="The MultiPush mark becomes four paper-sticker scenes. Animated gallery of actual outputs."></a>
+</p>
+
+A ten-second gallery of existing generated examples. [Watch the MP4](https://github.com/huyanxius/logo-to-stickers/releases/download/v1.0.0/logo-day-job.mp4).
 
 A small skill for turning a logo into a character with something to do.
 
