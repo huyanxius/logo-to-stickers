@@ -175,12 +175,21 @@
   const viewer = $('viewer');
   const scenes = [];
 
-  document.querySelectorAll('[data-surface]').forEach(button => button.addEventListener('click', () => {
-    const ink = button.dataset.surface === 'ink';
-    examples.classList.toggle('on-ink', ink);
-    viewer.classList.toggle('on-ink', ink);
-    document.querySelectorAll('[data-surface]').forEach(b => b.setAttribute('aria-pressed', String(b === button)));
-  }));
+  // 例子区的底色：没点过就跟着系统的浅色/深色走；点过以后只换这一段和大图，不影响整页。
+  const systemDark = matchMedia('(prefers-color-scheme: dark)');
+  const surfaceButtons = [...document.querySelectorAll('[data-surface]')];
+  let surface = null;
+  function paintSurface() {
+    const ink = surface ? surface === 'ink' : systemDark.matches;
+    [examples, viewer].forEach(node => {
+      node.classList.toggle('scheme-dark', surface === 'ink');
+      node.classList.toggle('scheme-light', surface === 'paper');
+    });
+    surfaceButtons.forEach(b => b.setAttribute('aria-pressed', String((b.dataset.surface === 'ink') === ink)));
+  }
+  surfaceButtons.forEach(button => button.addEventListener('click', () => { surface = button.dataset.surface; paintSurface(); }));
+  systemDark.addEventListener('change', paintSurface);
+  paintSurface();
 
   function el(tag, props = {}, ...children) {
     const node = document.createElement(tag);
